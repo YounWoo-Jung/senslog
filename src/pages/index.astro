@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostList from "../components/PostList.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 10);
+---
+
+<BaseLayout title="SensLog" description="A developer knowledge blog">
+  <section>
+    <h1 class="page-heading">Latest Posts</h1>
+    <PostList posts={posts} />
+    {posts.length >= 10 && (
+      <p style="margin-top: 1.5rem; text-align: center;">
+        <a href="/blog/">View all posts &rarr;</a>
+      </p>
+    )}
+  </section>
+</BaseLayout>

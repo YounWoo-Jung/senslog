@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Search — SensLog">
+  <h1 class="page-heading">Search</h1>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <div id="search" class="search-container"></div>
+
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", function () {
+      var script = document.createElement("script");
+      script.src = "/pagefind/pagefind-ui.js";
+      script.onload = function () {
+        new PagefindUI({
+          element: "#search",
+          showSubResults: true,
+        });
+      };
+      document.head.appendChild(script);
+    });
+  </script>
+</BaseLayout>
+
+<style is:global>
+  .search-container {
+    min-height: 300px;
+  }
+
+  /* Adapt Pagefind UI to our theme */
+  .pagefind-ui {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--text);
+    --pagefind-ui-background: var(--bg);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--tag-bg);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: var(--radius);
+    --pagefind-ui-font: var(--font-sans);
+  }
+</style>

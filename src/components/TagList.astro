@@ -1,0 +1,43 @@
+---
+interface Props {
+  tags: [string, number][];
+}
+
+const { tags } = Astro.props;
+---
+
+<ul class="tag-list">
+  {tags.map(([tag, count]) => (
+    <li>
+      <a href={`/tags/${tag}/`} class="tag-link">
+        <span class="tag">{tag}</span>
+        <span class="tag-count">({count})</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .tag-link:hover {
+    text-decoration: none;
+  }
+
+  .tag-count {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+</style>

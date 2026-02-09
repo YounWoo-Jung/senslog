@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PostList from "../../../components/PostList.astro";
+import Pagination from "../../../components/Pagination.astro";
+import { getCollection } from "astro:content";
+import type { GetStaticPathsOptions } from "astro";
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+  const seriesSet = new Set<string>();
+  for (const post of posts) {
+    if (post.data.series) {
+      seriesSet.add(post.data.series);
+    }
+  }
+
+  return [...seriesSet].flatMap((series) => {
+    const filtered = posts
+      .filter((post) => post.data.series === series)
+      .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+    return paginate(filtered, {
+      params: { series },
+      pageSize: 10,
+    });
+  });
+}
+
+const { series } = Astro.params;
+const { page } = Astro.props;
+---
+
+<BaseLayout title={`${series} — SensLog`}>
+  <h1 class="page-heading">Series: {series}</h1>
+  <PostList posts={page.data} />
+  <Pagination page={page} />
+</BaseLayout>

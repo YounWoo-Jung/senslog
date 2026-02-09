@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Next / Prev posts
+const allPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
+function formatDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+---
+
+<BaseLayout
+  title={`${post.data.title} — SensLog`}
+  description={post.data.description}
+  ogType="article"
+>
+  <article class="prose" data-pagefind-body>
+    <header>
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.data.date.toISOString()}>
+          {formatDate(post.data.date)}
+        </time>
+        {post.data.series && (
+          <span>
+            {" "}· Series: <a href={`/series/${post.data.series}/`}>{post.data.series}</a>
+          </span>
+        )}
+      </div>
+      <div class="post-tags-header">
+        {post.data.tags.map((tag) => (
+          <a href={`/tags/${tag}/`} class="tag">{tag}</a>
+        ))}
+      </div>
+    </header>
+
+    <hr />
+
+    <Content />
+  </article>
+
+  <nav class="post-nav">
+    <div>
+      {prevPost && (
+        <a href={`/blog/${prevPost.id}/`}>
+          &larr; {prevPost.data.title}
+        </a>
+      )}
+    </div>
+    <div>
+      {nextPost && (
+        <a href={`/blog/${nextPost.id}/`}>
+          {nextPost.data.title} &rarr;
+        </a>
+      )}
+    </div>
+  </nav>
+</BaseLayout>
+
+<style>
+  .post-tags-header {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .post-nav div:last-child {
+    text-align: right;
+  }
+</style>

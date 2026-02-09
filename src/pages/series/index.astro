@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SeriesList from "../../components/SeriesList.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+
+const seriesMap = new Map<string, number>();
+for (const post of posts) {
+  if (post.data.series) {
+    seriesMap.set(post.data.series, (seriesMap.get(post.data.series) || 0) + 1);
+  }
+}
+
+const seriesList = [...seriesMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout title="Series — SensLog">
+  <h1 class="page-heading">Series</h1>
+  {seriesList.length > 0 ? (
+    <SeriesList seriesList={seriesList} />
+  ) : (
+    <p>No series yet.</p>
+  )}
+</BaseLayout>

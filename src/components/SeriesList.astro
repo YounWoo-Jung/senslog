@@ -1,0 +1,54 @@
+---
+interface Props {
+  seriesList: [string, number][];
+}
+
+const { seriesList } = Astro.props;
+---
+
+<ul class="series-list">
+  {seriesList.map(([name, count]) => (
+    <li class="series-item">
+      <a href={`/series/${name}/`}>
+        <span class="series-name">{name}</span>
+        <span class="series-count">{count} posts</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .series-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .series-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .series-item:last-child {
+    border-bottom: none;
+  }
+
+  .series-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .series-item a:hover {
+    text-decoration: none;
+  }
+
+  .series-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .series-count {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+</style>
