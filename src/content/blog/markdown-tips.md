@@ -1,23 +1,23 @@
 ---
-title: "Markdown Tips for Technical Writing"
+title: "기술 문서를 위한 Markdown 팁"
 date: 2026-02-08
 tags: ["markdown", "writing"]
-description: "Essential Markdown patterns for writing clear, maintainable technical documentation."
+description: "명확하고 유지보수 가능한 기술 문서를 위한 핵심 Markdown 패턴."
 ---
 
-Good technical writing is a skill worth investing in. Here are some Markdown tips I use daily.
+좋은 기술 문서는 꾸준히 투자할 가치가 있는 역량입니다. 제가 매일 사용하는 Markdown 팁을 정리했습니다.
 
-## Use Headings for Structure
+## 제목으로 구조 잡기
 
-Don't skip heading levels. Go `h2 → h3 → h4` in order. This matters for:
+제목 단계는 건너뛰지 마세요. `h2 → h3 → h4` 순서대로 내려가는 것이 중요합니다. 이유는 다음과 같습니다:
 
-- Accessibility (screen readers)
-- SEO (search engines parse heading hierarchy)
-- Table of contents generation
+- 접근성(스크린 리더)
+- SEO(검색 엔진의 제목 계층 파싱)
+- 목차 자동 생성
 
-## Code Blocks with Language Tags
+## 언어 태그가 있는 코드 블록
 
-Always specify the language for syntax highlighting:
+구문 강조를 위해 언어를 항상 지정하세요:
 
 ```typescript
 function greet(name: string): string {
@@ -25,23 +25,22 @@ function greet(name: string): string {
 }
 ```
 
-## Tables for Structured Data
+## 구조화된 데이터를 위한 표
 
-| Feature | Supported |
+| 기능 | 지원 여부 |
 |---------|-----------|
-| Code blocks | ✅ |
-| Tables | ✅ |
-| Images | ✅ |
-| Math | With plugins |
+| 코드 블록 | ✅ |
+| 표 | ✅ |
+| 이미지 | ✅ |
+| 수식 | 플러그인 필요 |
 
-## Blockquotes for Callouts
+## 강조를 위한 인용문
 
-> **Note**: Blockquotes are great for highlighting important information
-> that readers shouldn't miss.
+> **참고**: 인용문은 독자가 놓치지 말아야 할 중요한 정보를 강조할 때 좋습니다.
 
-## Links and References
+## 링크와 참고 자료
 
-Use descriptive link text instead of "click here":
+"여기 클릭" 대신 의미 있는 링크 텍스트를 사용하세요:
 
-- ✅ Learn more about [Astro content collections](https://docs.astro.build/en/guides/content-collections/)
-- ❌ Click [here](https://docs.astro.build) for docs
+- ✅ [Astro 콘텐츠 컬렉션](https://docs.astro.build/en/guides/content-collections/) 더 알아보기
+- ❌ 문서를 보려면 [여기](https://docs.astro.build) 클릭

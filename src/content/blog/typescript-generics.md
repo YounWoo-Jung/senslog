@@ -1,16 +1,16 @@
 ---
-title: "Understanding TypeScript Generics"
+title: "TypeScript 제네릭 이해하기"
 date: 2026-02-01
 tags: ["typescript", "programming"]
 series: "TypeScript Deep Dive"
-description: "A practical guide to TypeScript generics with real-world examples."
+description: "실전 예제로 이해하는 TypeScript 제네릭 가이드."
 ---
 
-Generics are one of TypeScript's most powerful features. Let's break them down with practical examples.
+제네릭은 TypeScript의 가장 강력한 기능 중 하나입니다. 실전 예제로 차근차근 살펴봅시다.
 
-## The Problem
+## 문제 상황
 
-Without generics, you'd write separate functions for each type:
+제네릭이 없으면 타입마다 함수를 따로 만들어야 합니다:
 
 ```typescript
 function firstString(arr: string[]): string | undefined {
@@ -22,9 +22,9 @@ function firstNumber(arr: number[]): number | undefined {
 }
 ```
 
-## The Solution
+## 해결책
 
-Generics let you write it once:
+제네릭을 쓰면 한 번만 작성하면 됩니다:
 
 ```typescript
 function first<T>(arr: T[]): T | undefined {
@@ -35,9 +35,9 @@ const name = first(["Alice", "Bob"]); // string
 const age = first([25, 30]);          // number
 ```
 
-## Constraints
+## 제약 조건
 
-Use `extends` to constrain what types are allowed:
+`extends`로 허용할 타입을 제한할 수 있습니다:
 
 ```typescript
 function getLength<T extends { length: number }>(item: T): number {
@@ -49,7 +49,7 @@ getLength([1, 2, 3]);  // ✅
 getLength(42);         // ❌ Error
 ```
 
-## Generic Interfaces
+## 제네릭 인터페이스
 
 ```typescript
 interface Repository<T> {
@@ -59,4 +59,4 @@ interface Repository<T> {
 }
 ```
 
-Generics make your code reusable without sacrificing type safety. Start simple and add constraints as needed.
+제네릭은 타입 안정성을 유지하면서 코드 재사용성을 높여줍니다. 단순한 형태로 시작해서 필요할 때 제약을 추가하세요.
