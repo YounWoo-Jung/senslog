@@ -10,11 +10,11 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
 
 <BaseLayout title="SensLog" description="A developer knowledge blog">
   <section>
-    <h1 class="page-heading">Latest Posts</h1>
+    <h1 class="page-heading">최신 글</h1>
     <PostList posts={posts} />
     {posts.length >= 10 && (
       <p style="margin-top: 1.5rem; text-align: center;">
-        <a href="/blog/">View all posts &rarr;</a>
+        <a href="/blog/">전체 글 보기 &rarr;</a>
       </p>
     )}
   </section>

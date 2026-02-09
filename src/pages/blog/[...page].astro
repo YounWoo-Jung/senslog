@@ -14,8 +14,8 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Blog — SensLog">
-  <h1 class="page-heading">Blog</h1>
+<BaseLayout title="블로그 — SensLog">
+  <h1 class="page-heading">블로그</h1>
   <PostList posts={page.data} />
   <Pagination page={page} />
 </BaseLayout>
