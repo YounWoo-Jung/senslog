@@ -37,10 +37,3 @@ function greet(name: string): string {
 ## 강조를 위한 인용문
 
 > **참고**: 인용문은 독자가 놓치지 말아야 할 중요한 정보를 강조할 때 좋습니다.
-
-## 링크와 참고 자료
-
-"여기 클릭" 대신 의미 있는 링크 텍스트를 사용하세요:
-
-- ✅ [Astro 콘텐츠 컬렉션](https://docs.astro.build/en/guides/content-collections/) 더 알아보기
-- ❌ 문서를 보려면 [여기](https://docs.astro.build) 클릭
